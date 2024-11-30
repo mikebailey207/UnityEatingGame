@@ -6,7 +6,7 @@ public class MusicManager : MonoBehaviour
 {
     private static MusicManager instance;
     private AudioSource audioSource, runMusic;
-
+    public AudioClip mainMusicClip, townMusicClip;
     void Awake()
     {
         // Ensure there's only one instance of MusicManager across scenes
@@ -33,7 +33,54 @@ public class MusicManager : MonoBehaviour
     // This function is called every time a new scene is loaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+         if(scene.name == "TownEntrace" || scene.name == "OutsidePub" || scene.name == "ShopExit" || scene.name == "GardenExit")
+        {
+            audioSource.clip = townMusicClip;
+        }
+         if(scene.name == "ExteriorHouse")
+        {
+            audioSource.clip = mainMusicClip;
+        }
+         if(scene.name == "House" && GameManager.Instance.dailyTasksCompleted)
+        {
+            audioSource.clip = townMusicClip;
+        }
+         else if(scene.name == "House" && !GameManager.Instance.dailyTasksCompleted)
+        {
+            audioSource.clip = mainMusicClip;
+        }
+
         if (scene.name == "FoodChallenge")
+        {
+            audioSource.Stop();
+            runMusic.Stop();
+        }
+        else if (scene.name == "TypingGame")
+        {
+            audioSource.Stop();
+            runMusic.Stop();
+        }
+        else if (scene.name == "NachosChallenge")
+        {
+            audioSource.Stop();
+            runMusic.Stop();
+        }
+        else if (scene.name == "EndSceneTown")
+        {
+            audioSource.Stop();
+            runMusic.Stop();
+        }
+        else if (scene.name == "CornChallenge")
+        {
+            audioSource.Stop();
+            runMusic.Stop();
+        }
+        else if (scene.name == "SushiChallenge")
+        {
+            audioSource.Stop();
+            runMusic.Stop();
+        }
+        else if (scene.name == "ChiliChallenge")
         {
             audioSource.Stop();
             runMusic.Stop();
